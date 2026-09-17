@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Months — African IPOs, in shillings</title>
+<meta name="description" content="Every African share offer explained in Kenyan shillings, with an honest record of how each one performed after listing.">
+<style>
+:root{
+  --ink:#0E1A15; --paper:#F6F3EC; --card:#FCFBF7; --line:#DFDACF;
+  --green:#17714A; --soft:#E4EEE7; --amber:#C07A12; --ambersoft:#FBF0D8;
+  --red:#A03A2A; --redsoft:#FBE6E3; --muted:#6E766C;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#ECEAE3; --paper:#101410; --card:#1A1F19; --line:#323A30;
+    --green:#7DC79C; --soft:#1C2D23; --amber:#E0AE55; --ambersoft:#31280F;
+    --red:#E08E7E; --redsoft:#37211C; --muted:#99A096;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ECEAE3; --paper:#101410; --card:#1A1F19; --line:#323A30;
+  --green:#7DC79C; --soft:#1C2D23; --amber:#E0AE55; --ambersoft:#31280F;
+  --red:#E08E7E; --redsoft:#37211C; --muted:#99A096;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:660px;margin:0 auto;padding:0 16px 64px}
+
+.kicker{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+h1{font-size:31px;line-height:1.1;margin:0 0 12px;letter-spacing:-.02em;font-weight:800}
+h2{font-size:21px;line-height:1.2;margin:24px 0 10px;font-weight:700;letter-spacing:-.01em}
+h3{font-size:16px;margin:18px 0 7px;font-weight:700}
+p{margin:0 0 13px;font-size:16px}
+.sub{font-size:16px;color:var(--muted);margin:0 0 4px}
+.small{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 0 12px;-webkit-overflow-scrolling:touch;
+  position:sticky;top:0;background:var(--paper);z-index:5;border-bottom:1px solid var(--line)}
+nav button{flex:0 0 auto;padding:10px 14px;border:1.5px solid var(--line);background:var(--card);
+  color:var(--muted);border-radius:99px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+nav button.on{border-color:var(--green);background:var(--soft);color:var(--green)}
+
+.panel{display:none;padding-top:18px}
+.panel.on{display:block}
+.back{display:inline-flex;align-items:center;gap:7px;margin:0 0 16px;padding:9px 14px;
+  border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  font:inherit;font-size:14px;cursor:pointer}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.stat b{display:block;font-size:21px;font-weight:800;letter-spacing:-.01em}
+.stat span{font-size:12px;color:var(--muted)}
+
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+input,select{width:100%;font:inherit;font-size:17px;padding:13px;border:1.5px solid var(--line);
+  border-radius:11px;background:var(--card);color:var(--ink)}
+input:focus,select:focus{outline:0;border-color:var(--green)}
+.two{display:flex;gap:8px}.two>*{flex:1}
+
+.out{background:var(--soft);border-radius:12px;padding:16px;margin:16px 0}
+.line{display:flex;justify-content:space-between;gap:12px;padding:9px 0;
+  border-bottom:1px solid rgba(125,125,125,.18);font-size:15px}
+.line:last-child{border:0}
+.line span{color:var(--muted)}
+.line b{font-weight:700;text-align:right}
+.big{font-size:22px;font-weight:800}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:12px 0}
+th,td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+th:first-child,td:first-child{text-align:left}
+.up{color:var(--green);font-weight:700}
+.down{color:var(--red);font-weight:700}
+
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border:0;cursor:pointer;
+  font:inherit;font-size:17px;font-weight:700;padding:16px;border-radius:13px;margin-top:11px}
+.btn.wa{background:#128C4A;color:#fff}
+.btn.main{background:var(--green);color:var(--paper)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--line);font-weight:600}
+.btn.quiet{background:none;color:var(--muted);border:1.5px solid var(--line);font-weight:600;font-size:15px}
+
+.flag{background:var(--redsoft);border-left:3px solid var(--red);padding:13px 15px;margin:16px 0;font-size:15px}
+.yes,.no,.maybe{border-radius:12px;padding:14px;margin:12px 0;border:1px solid}
+.yes{background:var(--soft);border-color:var(--green)}
+.no{background:var(--redsoft);border-color:var(--red)}
+.maybe{background:var(--ambersoft);border-color:var(--amber)}
+.yes b,.no b,.maybe b{display:block;margin-bottom:5px;font-size:16px}
+
+.price{background:var(--card);border:2px solid var(--green);border-radius:16px;padding:20px;margin:16px 0}
+.price .amt{font-size:38px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.price .per{font-size:15px;color:var(--muted)}
+.tick{display:flex;gap:10px;align-items:flex-start;margin:11px 0;font-size:15.5px;line-height:1.45}
+.tick .m{color:var(--green);font-weight:800;flex:0 0 auto}
+
+.clock{background:var(--green);color:var(--paper);border-radius:14px;padding:15px;margin:16px 0;text-align:center}
+.clock b{display:block;font-size:29px;line-height:1;font-weight:800}
+.clock span{font-size:13px;opacity:.85}
+
+#gate{padding:34px 0 40px;min-height:80vh;display:flex;flex-direction:column;justify-content:center}
+#gate h1{font-size:33px}
+.fact{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:13px 14px;margin-bottom:9px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:0 0 8px;margin-top:8px}
+.fact p{margin:0;font-size:15px;line-height:1.45}
+.fact p b{display:block}
+#main{display:none}
+#main.on{display:block}
+
+ol,ul{padding-left:20px;margin:0 0 14px}
+li{margin-bottom:8px;font-size:15.5px}
+code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:14px;font-weight:700}
+.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================= ENTRANCE ================= -->
+<section id="gate">
+  <div style="display:flex;gap:7px;justify-content:flex-end;padding-top:14px"><button class="lang on" data-lang="en" style="padding:7px 14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;font:inherit;font-size:13px;font-weight:700;cursor:pointer">English</button><button class="lang" data-lang="sh" style="padding:7px 14px;border:1.5px solid var(--line);background:var(--card);color:var(--muted);border-radius:99px;font:inherit;font-size:13px;font-weight:700;cursor:pointer">Sheng</button></div>
+  <p class="kicker">Months · Nairobi</p>
+  <h1 data-sh="Uganda inamiliki bomba ya Kenya kuliko Wakenya wenyewe.">Uganda owns more of Kenya’s pipeline than Kenyans do.</h1>
+  <div style="display:flex;gap:8px;margin:14px 0 18px"><div class="stat" style="flex:1;text-align:center"><b style="color:var(--red)">21.2%</b><span>Uganda &amp; Rwanda</span></div><div class="stat" style="flex:1;text-align:center"><b style="color:var(--amber)">2.6%</b><span>all Kenyan citizens</span></div></div>
+  <p class="sub" style="font-size:17px;margin-bottom:18px" data-sh="Serikali iliuza asilimia 65 ya Kenya Pipeline mwaka huu. Wakenya walipata 2.6% pekee. Sio kwa sababu hatuna doo — ni kwa sababu hakuna mtu alitufikia.">The government sold 65% of Kenya Pipeline this year. Citizens ended up with 2.6%. Not because we had no money — because nobody came for us.</p>
+
+  <div class="fact"><div class="dot"></div><p data-sh="&lt;b&gt;Kenya Pipeline walitaka Wakenya millioni mbili.&lt;/b&gt;Walikuja 73,000 tu. Sisi tunakuambia maana yake."><b>Kenya Pipeline asked for two million Kenyans.</b>73,000 came. We are the ones who tell you why that matters.</p></div>
+  <div class="fact"><div class="dot"></div><p data-sh="&lt;b&gt;Dangote inafunga 13 October.&lt;/b&gt;Passport ya Kenya haiingii. Lakini kuna njia ingine, na ni November."><b>Dangote closes 13 October.</b>A Kenyan passport can't get into it. There is another way, and it's in November.</p></div>
+  <div class="fact"><div class="dot"></div><p data-sh="&lt;b&gt;Hakuna mtu anakuambia IPO ilienda aje baadaye.&lt;/b&gt;Sisi tunakuambia. Tumeanza na ile imetoka kulist."><b>Nobody publishes how IPOs actually did.</b>We do. Starting with the one that just listed.</p></div>
+
+  <a class="btn wa" id="joinTop" href="#" target="_blank" rel="noopener" data-sh="Ingia kwa group — ni free">Join the group — free</a>
+  <button class="btn quiet" id="skipBtn" data-sh="Ama angalia kwanza">Or look around first</button>
+  <p class="small" style="text-align:center;margin-top:14px" data-sh="Group ya WhatsApp ya Wakenya wanafuatilia hizi listing za Africa.">A WhatsApp group for Kenyans watching African listings.</p>
+</section>
+
+<div id="main">
+
+<nav>
+  <button class="on" data-tab="t0" data-sh="Sasa">Now</button>
+  <button data-tab="t1" data-sh="Rekodi">The record</button>
+  <button data-tab="t2" data-sh="Kwa shilingi">In shillings</button>
+  <button data-tab="t3" data-sh="Naweza nunua?">Can I buy?</button>
+  <button data-tab="t4">The Desk</button>
+  <button data-tab="t5" data-sh="Nihesabu">Count me</button>
+  <button data-tab="t6" data-sh="Barua">The letter</button>
+</nav>
+
+<!-- ================= NOW ================= -->
+<section class="panel on" id="t0">
+  <p class="kicker">Open now</p>
+  <h1>Dangote Refinery</h1>
+  <p class="sub">₦525 a share · ₦2.15 trillion · 3.3% of the company</p>
+
+  <div class="clock"><b id="days">—</b><span id="clockLabel">days until the offer closes</span></div>
+
+  <div class="grid">
+    <div class="stat"><b>₦5,250</b><span>minimum order, 10 shares</span></div>
+    <div class="stat"><b id="minKesTop">—</b><span>roughly, in shillings</span></div>
+    <div class="stat"><b>13 Oct</b><span>offer closes</span></div>
+    <div class="stat"><b>Nov</b><span>lists on the NGX</span></div>
+  </div>
+
+  <p data-sh="Refinery kubwa zaidi Africa, mapipa 700,000 kwa siku hapo Lagos, inauza kipande yake kwa mara ya kwanza. Ukishikilia miezi kumi na mbili unapata share ya bure, ukiendelea mpaka ishirini na nne unapata ingine — ndio maana tunaitwa Months.">Africa's largest single-train refinery, 700,000 barrels a day in Lagos, selling a slice of itself for the first time. Two free shares if you hold twelve months, a third if you hold twenty-four — which is where our name comes from.</p>
+
+  <div class="flag">A Kenyan passport holder cannot get a Nigerian bank verification number, and without one no Nigerian broker can open your account. <b>The offer itself is shut to us.</b> The open-market route after November is not.</div>
+
+  <button class="btn main" data-tab="t3">Check if you can buy</button>
+  <button class="btn ghost" data-tab="t2">Work out what it costs</button>
+
+  <h2>What's next after this</h2>
+  <div class="card">
+    <div class="line"><span>Kenya</span><b>State divestitures continue</b></div>
+    <div class="line"><span>Nigeria</span><b>NNPC listing committed</b></div>
+    <div class="line"><span>Us</span><b>We cover every one</b></div>
+  </div>
+</section>
+
+<!-- ================= THE RECORD ================= -->
+<section class="panel" id="t1">
+  <button class="back" data-tab="t0">← Back</button>
+  <p class="kicker">The honest scorecard</p>
+  <h1 data-sh="Ile ya mwisho ilienda aje kweli.">How the last one actually went.</h1>
+  <p data-sh="Hakuna mtu Kenya anaweka hii wazi. Wote wanapiga story ya launch halafu wanakaa kimya. Sisi tunaweka rekodi, hata kama haipendezi.">Nobody in Kenya publishes this. Everyone runs the launch story and goes quiet afterwards. We keep the record, whether it flatters the offer or not.</p>
+
+  <h2>Kenya Pipeline · listed 10 March 2026</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Category</th><th>Quota</th><th>Taken</th><th>Of quota</th></tr>
+    <tr><td>Kenyan institutions</td><td>21.1bn</td><td>67.0bn</td><td class="up">316%</td></tr>
+    <tr><td>East African</td><td>21.2bn</td><td>34.7bn</td><td class="up">164%</td></tr>
+    <tr><td>Kenyan individuals</td><td>21.2bn</td><td>4.1bn</td><td class="down">19%</td></tr>
+    <tr><td>KPC employees</td><td>5.3bn</td><td>0.10bn</td><td class="down">2%</td></tr>
+    <tr><td>Foreign</td><td>21.2bn</td><td>0.035bn</td><td class="down">0.2%</td></tr>
+    <tr><td>Oil marketers</td><td>15.9bn</td><td>0.023bn</td><td class="down">0.1%</td></tr>
+  </table>
+  </div>
+
+  <div class="grid">
+    <div class="stat"><b>105.7%</b><span>subscription — it cleared</span></div>
+    <div class="stat"><b>KES 9.18</b><span>day one close, on a KES 9.00 offer</span></div>
+    <div class="stat"><b>73,000</b><span>individual applicants</span></div>
+    <div class="stat"><b>2 million</b><span>the government's target</span></div>
+  </div>
+
+  <h3>What that means if you bought</h3>
+  <p>A KES 59,700 average holding was worth about KES 60,900 at the first day's close. A 2% gain — real, but modest, and the shares barely moved because institutions and Ugandan state funds hold 62% of the company and have no reason to sell.</p>
+
+  <div class="flag">Safaricom drew over 800,000 Kenyans in 2008 with paper forms and bank queues. KPC drew 73,000 with USSD, M-Pesa and an app. <b>Access got easier and nine in ten of us stopped showing up.</b></div>
+
+  <p class="small">Sources: KPC IPO results announcement 4 March 2026; Treasury figures via Business Daily; NSE listing data 10 March 2026.</p>
+</section>
+
+<!-- ================= IN SHILLINGS ================= -->
+<section class="panel" id="t2">
+  <button class="back" data-tab="t0">← Back</button>
+  <h1 data-sh="Inakugharimu ngapi kwa shilingi.">What it costs in shillings.</h1>
+  <p>Shares are priced in naira, so your money makes two hops — shillings to dollars, dollars to naira. Each hop costs something.</p>
+
+  <div class="two">
+    <div><label>Shillings per dollar</label><input id="kesUsd" inputmode="decimal" value="129"></div>
+    <div><label>Naira per dollar</label><input id="ngnUsd" inputmode="decimal" value="1350"></div>
+  </div>
+  <p class="small">Rates move daily. Put today's in and everything updates.</p>
+
+  <label>How much would you put in? (KES)</label>
+  <input id="kesIn" inputmode="numeric" value="50000">
+
+  <label>Costs along the way (%)</label>
+  <div class="two">
+    <div><input id="fxFee" inputmode="decimal" value="2.5" aria-label="FX spread"></div>
+    <div><input id="brokerFee" inputmode="decimal" value="1.5" aria-label="Broker and wire fees"></div>
+  </div>
+  <p class="small">Left: what your bank takes on the currency swap. Right: broker and wire fees. Both are estimates — ask before you send.</p>
+
+  <div class="out">
+    <div class="line"><span>You send</span><b id="oKes">—</b></div>
+    <div class="line"><span>After costs</span><b id="oNet">—</b></div>
+    <div class="line"><span>In naira</span><b id="oNgn">—</b></div>
+    <div class="line"><span>Shares at ₦525</span><b class="big" id="oShares">—</b></div>
+    <div class="line"><span>Leftover</span><b id="oLeft">—</b></div>
+  </div>
+
+  <h2>The months bonus</h2>
+  <div class="scroll"><table id="monthsTbl"></table></div>
+  <p class="small">Two free shares in total, not two per share held. For someone holding the minimum ten, that's a 20% bonus. For a large holder it rounds to nothing.</p>
+
+  <div class="flag">You buy in naira and live in shillings. If the naira weakens against the shilling you lose value even if the Lagos price never moves. Dollar dividends were announced but still awaiting Nigerian regulatory approval — treat that as intended, not settled.</div>
+</section>
+
+<!-- ================= CAN I BUY ================= -->
+<section class="panel" id="t3">
+  <button class="back" data-tab="t0">← Back</button>
+  <h1 data-sh="Kwa ukweli, unaweza nunua?">Can you actually buy it?</h1>
+  <p>This depends on your passport, not where you live. Almost nobody answers it straight.</p>
+
+  <label>Which is you?</label>
+  <select id="who">
+    <option value="ke">Kenyan passport, living in Kenya</option>
+    <option value="ng">Nigerian passport, living anywhere</option>
+    <option value="ngke">Living in Nigeria, with a BVN</option>
+    <option value="inst">Investing institutional money</option>
+  </select>
+  <div id="verdict"></div>
+
+  <h2>The words you'll meet</h2>
+  <p class="small"><b>BVN</b> — Bank Verification Number. Nigeria's banking ID. Citizens and residents only. Without it, no retail broker there can open your account.</p>
+  <p class="small"><b>CSCS account</b> — where Nigerian shares live electronically. Your broker opens it for you.</p>
+  <p class="small"><b>CDS account</b> — the Kenyan equivalent, for NSE shares. A licensed broker opens it in one to three days, usually free.</p>
+  <p class="small"><b>CCI</b> — Certificate of Capital Importation. Proof your foreign currency entered Nigeria legally. Without it, getting your money back out later is difficult. This is the one people skip and regret.</p>
+
+  <button class="btn main" data-tab="t4">What we do about it</button>
+</section>
+
+<!-- ================= THE DESK ================= -->
+<section class="panel" id="t4">
+  <button class="back" data-tab="t0">← Back</button>
+  <p class="kicker">Paid membership</p>
+  <h1>The Desk</h1>
+  <p data-sh="Group ni free na itabaki free. The Desk ni ya wale wako serious — wanataka kuweka doo na kazi ifanywe vizuri.">The group is free and stays free. The Desk is for people who intend to actually put money somewhere and want the work done properly.</p>
+
+  <div class="price">
+    <p class="amt">KES 300</p>
+    <p class="per" data-sh="kwa mwezi · mwezi wa kwanza ni 100 · unaweza acha wakati wowote">a month · first month KES 100 · stop any time</p>
+    <div class="tick"><span class="m">✓</span><span><b>Every African offer, in shillings.</b> Terms, dates, minimums and the currency maths, before the window closes rather than after.</span></div>
+    <div class="tick"><span class="m">✓</span><span><b>The record, kept honestly.</b> Every listing tracked against its offer price. If one goes badly we publish that too.</span></div>
+    <div class="tick"><span class="m">✓</span><span><b>The walkthrough.</b> CDS account, application, payment, allotment, refunds — each step, in order, with the pitfalls named.</span></div>
+    <div class="tick"><span class="m">✓</span><span><b>Alerts that arrive in time.</b> Seven days, then two days, before an offer closes.</span></div>
+    <div class="tick"><span class="m">✓</span><span><b>Your questions answered.</b> Plain answers, by a person, in the members' group.</span></div>
+    <a class="btn wa" id="payBtn" href="#" target="_blank" rel="noopener" data-sh="Ingia The Desk">Join the Desk</a>
+    <p class="small" style="text-align:center;margin-top:10px">Pay by M-Pesa, then send the confirmation code. You're in the same day.</p>
+  </div>
+
+  <h2>How to pay</h2>
+  <div class="card">
+    <div class="line"><span>Buy Goods till</span><b><code id="tillNo">REPLACE_TILL</code></b></div>
+    <div class="line"><span>First month</span><b>KES 100</b></div>
+    <div class="line"><span>Then monthly</span><b>KES 300</b></div>
+    <div class="line"><span>Then</span><b>Send the code on WhatsApp</b></div>
+  </div>
+
+  <h2>What the Desk is not</h2>
+  <div class="flag">
+    We are not licensed to give investment advice, hold your money, or buy shares for you — and we don't. The Desk sells information, tracking and company. Every actual transaction goes through a CMA-licensed broker, chosen by you, in your own name.
+  </div>
+
+  <h2>Why this is worth 300</h2>
+  <p>One missed deadline costs you an entire offer. One misunderstood currency hop costs more than a year of membership. And the thing you cannot get anywhere else — whether the last five listings actually made anyone money — is the only number that should decide whether you join the next one.</p>
+
+  <button class="btn ghost" data-tab="t5">Not yet — just count me</button>
+</section>
+
+<!-- ================= REGISTER ================= -->
+<section class="panel" id="t5">
+  <button class="back" data-tab="t0">← Back</button>
+  <h1 data-sh="Rejista ya Wakenya">The Kenyan register</h1>
+  <p>One question, and it commits you to nothing. <b>If a clean, legal route existed for Kenyans to buy into these offers, would you put money in?</b></p>
+  <p>No money changes hands here and nothing is being sold. This is a count — and a count is the only thing that gets a bank or a broker to open a door for us.</p>
+
+  <div class="card">
+    <p style="margin:0 0 4px"><b>Why the number matters</b></p>
+    <p class="small" style="margin:0">Kenya Pipeline set aside a fifth of its shares for East African investors and Dangote's prospectus names an African channel. The demand is wanted. It has never been counted and put in front of anyone.</p>
+  </div>
+
+  <a class="btn wa" id="eoiYes" href="#" target="_blank" rel="noopener" data-sh="Ndio — nihesabu">Yes — count me in</a>
+  <a class="btn ghost" id="eoiWatch" href="#" target="_blank" rel="noopener" data-sh="Naangalia tu — niambie ikiwezekana">Watching — tell me when it's possible</a>
+  <a class="btn quiet" id="eoiNo" href="#" target="_blank" rel="noopener" data-sh="Sio hii, lakini nishikie ingine">Not this one, but keep me for the next</a>
+  <p class="small" style="margin-top:14px">Each opens WhatsApp with your answer written. Change the amount to whatever is true — that number is the useful part.</p>
+
+  <h2>What happens with it</h2>
+  <ol>
+    <li>The total goes to a Kenyan bank and a licensed broker as a demand case, not a request.</li>
+    <li>If a compliant route opens, the register hears first.</li>
+    <li>If it doesn't, the same register covers the next listing — which is the point.</li>
+  </ol>
+
+  <a class="btn wa" id="joinBottom" href="#" target="_blank" rel="noopener" style="margin-top:22px" data-sh="Ingia group ya free">Join the free group</a>
+</section>
+
+
+<!-- ================= OPEN LETTER ================= -->
+<section class="panel" id="t6">
+  <button class="back" data-tab="t0">← Back</button>
+  <p class="kicker">Open letter · Nairobi, September 2026</p>
+  <h1>Dear Aliko Dangote</h1>
+
+  <p>You have told the press this is the IPO of the people, and that you want <b>ten million retail investors</b>. I want you to have them. I also want to tell you, from Nairobi, exactly how you are going to miss.</p>
+
+  <p>In January this year my government sold 65% of Kenya Pipeline — KES 106.3 billion, the largest share sale in East African history. It targeted two million Kenyan investors.</p>
+
+  <p><b>Seventy-three thousand came.</b> Three and a half per cent of the target.</p>
+
+  <div class="card">
+    <div class="line"><span>Kenyan individuals took</span><b>19% of their quota</b></div>
+    <div class="line"><span>Foreign investors took</span><b>0.2% of theirs</b></div>
+    <div class="line"><span>Left unclaimed</span><b>KES 59 billion</b></div>
+    <div class="line"><span>Bought instead by</span><b>Pension funds and Uganda</b></div>
+  </div>
+
+  <p>Understand what was <i>not</i> the problem. You could apply by USSD. You could pay by M-Pesa. There was an electronic portal and a fintech front-end. Shares now trade inside the M-Pesa app with no depository account at all. <b>Every rail people said was missing had been built.</b></p>
+
+  <p>In 2008 Safaricom drew over eight hundred thousand Kenyans with paper forms and bank queues. In 2026, with all of that technology, we drew seventy-three thousand. Access improved and participation fell nine in ten.</p>
+
+  <h2>What this means for you</h2>
+
+  <p>Your prospectus names an African distribution channel. Kenya reserved a fifth of its offer for East Africans and that tranche filled — with Ugandan state oil money and Rwandan pension funds. <b>Sovereign capital crosses the border easily. Retail capital has no road at all.</b></p>
+
+  <p>And for us it is worse than a road that is rough. A Kenyan passport holder cannot obtain a Nigerian bank verification number. Without one, no Nigerian broker can open an account. <b>Your offer is not difficult for Kenyans. It is closed.</b></p>
+
+  <p>So when 13 October comes and the retail number is counted, it will be Nigerians and the Nigerian diaspora. East Africa will be a rounding error, and the headline will say the continent turned out for you. It will not be true.</p>
+
+  <h2>What we are doing about it</h2>
+
+  <p>This page exists because nobody in Kenya explains a share offer in shillings, tells people plainly whether they are eligible, or publishes afterwards how the last listing actually performed. We do all three. We hold no money, execute nothing and advise no one — we assemble the demand and hand it to people licensed to serve it.</p>
+
+  <p>We are building a register of Kenyans who would buy if a compliant route existed. Every name carries an amount. When it is large enough it goes to a Kenyan bank and a licensed broker, and it becomes a business case rather than a request.</p>
+
+  <h2>What we ask</h2>
+  <ol>
+    <li><b>Name the African channel.</b> Say which East African intermediaries can take applications, or say plainly that none can. Either answer is more use than silence.</li>
+    <li><b>Publish the retail split by country</b> when the offer closes. If East Africa is a rounding error, let us all see it.</li>
+    <li><b>Talk to whoever builds the retail layer here</b> before your next raise, or before NNPC. It will not build itself, and Nigeria will have the same problem in reverse when it wants East African money.</li>
+  </ol>
+
+  <p>The refinery is a serious thing and I hope it does what you say it will. I would simply rather my neighbours owned a piece of it than read about it.</p>
+
+  <p style="margin-top:22px"><b>Alvin Mutuma</b><br>Months · Nairobi</p>
+
+  <div class="card" style="margin-top:22px">
+    <p style="margin:0 0 6px"><b>Every figure on this site is checked before publication.</b></p>
+    <p class="small" style="margin:0">Figures verified by <b>Abigael Kendi, CPA (Section 4)</b>. Sources are named on each page: KPC IPO results announcement 4 March 2026, Treasury figures via Business Daily, NSE listing data 10 March 2026, and the Dangote Refinery prospectus as reported September 2026.</p>
+  </div>
+
+  <a class="btn wa" id="shareLetter" href="#" target="_blank" rel="noopener">Send this to someone</a>
+  <button class="btn ghost" data-tab="t5">Add your name to the register</button>
+</section>
+
+<p class="foot">
+Months is an independent publication based in Nairobi. It is not a broker, dealer, custodian or investment adviser, holds no client money, and is not licensed by the Capital Markets Authority or any other regulator. Nothing here is investment advice or a recommendation to buy any security. Figures are drawn from published prospectuses, exchange announcements and press reporting, and exchange rates are your own inputs. Verify everything against the official documents and a licensed intermediary before acting. Investments can lose value.
+</p>
+
+</div>
+</div>
+
+<script>
+/* ------------------------------------------------------------------
+   FILL THESE IN
+   ------------------------------------------------------------------ */
+var GROUP_LINK = "https://chat.whatsapp.com/FNX5F2LJVRO3g3U6KakQ2q";
+var MY_NUMBER  = "254759610468";
+var TILL       = "REPLACE_TILL";      // your M-Pesa Buy Goods till number
+
+(function(){
+  var gate = document.getElementById('gate'), main = document.getElementById('main');
+  function wa(m){ return 'https://wa.me/' + MY_NUMBER + '?text=' + encodeURIComponent(m); }
+
+  document.getElementById('joinTop').href = GROUP_LINK;
+  document.getElementById('joinBottom').href = GROUP_LINK;
+  document.getElementById('tillNo').textContent = TILL;
+
+  document.getElementById('payBtn').href = wa(
+    'MONTHS DESK\n\nI want to join. Paying KES 100 for the first month to till ' + TILL +
+    '.\n\nName: \nM-Pesa code: ');
+  document.getElementById('eoiYes').href = wa(
+    'MONTHS — register\n\nYES, count me in. About KES 20,000 if a legal route opens.\n\nName: ');
+  document.getElementById('eoiWatch').href = wa(
+    'MONTHS — register\n\nWATCHING. Tell me when a Kenyan route is possible.\n\nName: ');
+  var sl = document.getElementById('shareLetter');
+  if (sl) sl.href = 'https://wa.me/?text=' + encodeURIComponent(
+    'Uganda owns 21.2% of Kenya Pipeline. All Kenyan citizens together own 2.6%.\n\nThe government wanted 2 million Kenyan investors. 73,000 came.\n\nOpen letter to Aliko Dangote: ' + location.href);
+
+  document.getElementById('eoiNo').href = wa(
+    'MONTHS — register\n\nNot this one, but keep me for the next listing.');
+
+  function enter(){
+    gate.style.display='none'; main.classList.add('on');
+    try{ sessionStorage.setItem('monthsIn','1'); }catch(e){}
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  document.getElementById('skipBtn').addEventListener('click', enter);
+  document.getElementById('joinTop').addEventListener('click', function(){ setTimeout(enter,400); });
+  var seen=false; try{ seen = sessionStorage.getItem('monthsIn')==='1'; }catch(e){}
+  if(seen) enter();
+
+  var tabs = document.querySelectorAll('nav button');
+  function go(id){
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('on'); });
+    document.getElementById(id).classList.add('on');
+    tabs.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-tab')===id); });
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-tab]');
+    if(b) go(b.getAttribute('data-tab'));
+  });
+
+  var close = new Date('2026-10-13T23:59:59+01:00');
+  var d = Math.ceil((close - new Date())/86400000);
+  if(d>0){ document.getElementById('days').textContent = d; }
+  else { document.getElementById('days').textContent='Closed';
+         document.getElementById('clockLabel').textContent='the offer window has ended'; }
+
+  function n(id){ return parseFloat(document.getElementById(id).value)||0; }
+  function f(x,c){ return (c?c+' ':'') + Math.round(x).toLocaleString(); }
+
+  function calc(){
+    var kesUsd=n('kesUsd'), ngnUsd=n('ngnUsd'), kes=n('kesIn');
+    var fees=(n('fxFee')+n('brokerFee'))/100;
+    if(!kesUsd||!ngnUsd) return;
+    var net=kes*(1-fees), usd=net/kesUsd, ngn=usd*ngnUsd;
+    var shares=Math.floor(ngn/525/10)*10, left=ngn-shares*525;
+    document.getElementById('oKes').textContent=f(kes,'KES');
+    document.getElementById('oNet').textContent=f(net,'KES');
+    document.getElementById('oNgn').textContent=f(ngn,'₦');
+    document.getElementById('oShares').textContent=shares.toLocaleString();
+    document.getElementById('oLeft').textContent=f(left,'₦');
+    var minKes=(5250/ngnUsd)*kesUsd/(1-fees);
+    document.getElementById('minKesTop').textContent=f(minKes,'KES');
+    var h='<tr><th>When</th><th>Shares</th><th>Bonus</th><th>In KES</th></tr>';
+    [['Today',0],['12 months',1],['24 months',2]].forEach(function(r){
+      var b=r[1]*525, k=(b/ngnUsd)*kesUsd;
+      h+='<tr><td>'+r[0]+'</td><td>'+(shares+r[1]).toLocaleString()+'</td><td>₦'+
+         b.toLocaleString()+'</td><td>'+Math.round(k).toLocaleString()+'</td></tr>';
+    });
+    document.getElementById('monthsTbl').innerHTML=h;
+  }
+  ['kesUsd','ngnUsd','kesIn','fxFee','brokerFee'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calc);
+  });
+
+  var V = {
+    ke:['no','No clean retail route into the Dangote offer',
+      'A Kenyan passport cannot get a BVN, and without one a Nigerian retail broker cannot open your account. The custodian-bank route is built for institutional sums. Your realistic path is the open market after the November listing, through a regulated platform that holds Nigerian shares via a licensed broker. The Desk covers that route when it opens.'],
+    ng:['yes','Yes — this route is open to you',
+      'Get a Non-Resident BVN, open a Nigerian bank account, and apply through a licensed Nigerian broker or the exchange portal before 13 October. Your broker opens the CSCS account automatically.'],
+    ngke:['maybe','Usually yes — confirm with the broker',
+      'A foreign national resident in Nigeria holding a BVN and a Nigerian bank account can normally apply through a retail broker. Ask yours directly, because practice varies between firms.'],
+    inst:['maybe','Yes, through a custodian',
+      'Bring funds in through a custodian bank and insist in writing on a Certificate of Capital Importation in your name. Keep it and the SWIFT confirmation. Qualified investors applying directly must subscribe for at least 50,000 shares.']
+  };
+  function verdict(){
+    var v = V[document.getElementById('who').value];
+    document.getElementById('verdict').innerHTML =
+      '<div class="'+v[0]+'"><b>'+v[1]+'</b>'+v[2]+'</div>';
+  }
+  document.getElementById('who').addEventListener('change', verdict);
+
+  var swapped = false;
+  function setLang(l){
+    var els = document.querySelectorAll('[data-sh]');
+    for (var i=0;i<els.length;i++){
+      var e = els[i];
+      if (!e.hasAttribute('data-en')) e.setAttribute('data-en', e.innerHTML);
+      e.innerHTML = (l === 'sh') ? e.getAttribute('data-sh') : e.getAttribute('data-en');
+    }
+    var bs = document.querySelectorAll('.lang');
+    for (var j=0;j<bs.length;j++){
+      var on = bs[j].getAttribute('data-lang') === l;
+      bs[j].style.color = on ? 'var(--ink)' : 'var(--muted)';
+      bs[j].style.borderColor = on ? 'var(--green)' : 'var(--line)';
+    }
+    try { localStorage.setItem('monthsLang', l); } catch(e){}
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-lang]');
+    if (b) setLang(b.getAttribute('data-lang'));
+  });
+  var saved = 'en';
+  try { saved = localStorage.getItem('monthsLang') || 'en'; } catch(e){}
+  setLang(saved);
+
+  calc(); verdict();
+})();
+</script>
+</body>
+</html>
